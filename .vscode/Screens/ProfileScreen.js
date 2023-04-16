@@ -32,30 +32,27 @@ const ProfileScreen = () => {
       </ImageBackground>
       <View style={styles.bioContainer}>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button}>
-            <Ionicons name="key" size={24} color="black" />
-            <Text style={styles.buttonText}>Edit Password</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button}>
-            <Ionicons name="mail" size={24} color="black" />
-            <Text style={styles.buttonText}>Edit Email</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button}>
-            <Ionicons name="person" size={24} color="black" />
-            <Text style={styles.buttonText}>Edit Name</Text>
-          </TouchableOpacity>
+          <View style={{ flexDirection: "row" }}>
+            <Ionicons
+              style={styles.button}
+              name="pencil"
+              size={25}
+              color="orange"
+            />
+            <Text style={styles.buttonText}>Profile</Text>
+          </View>
+          <View style={{ flexDirection: "row" }}>
+            <Ionicons
+              style={styles.button}
+              name="key"
+              size={30}
+              color="black"
+            />
+            <Text style={styles.buttonText}>Password</Text>
+          </View>
         </View>
 
-        <Text style={styles.bio}>
-          They decide to try to shake off the Black Riders by cutting through
-          the Old Forest. Merry and Pippin are trapped by Old Man Willow, an
-          ancient tree who controls much of the forest, but are rescued by Tom
-          Bombadil.
-        </Text>
+        <Text style={styles.bio}></Text>
       </View>
     </View>
   );
@@ -66,17 +63,16 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "flex-start",
-    backgroundColor: "#fff",
+    backgroundColor: "black",
   },
   backgroundImage: {
-    flex: 1,
+    height: 200,
     width: "100%",
-    height: "100%",
   },
   profileContainer: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    paddingTop: 20,
   },
   profilePic: {
     width: 120,
@@ -89,41 +85,32 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   bioContainer: {
-    flex: 1,
     width: "100%",
     paddingHorizontal: 20,
-    paddingVertical: 30,
-    backgroundColor: "#fff",
+    paddingTop: 50,
+    backgroundColor: "#fff3",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     marginTop: -20,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.65,
-    elevation: 7,
   },
   bio: {
     fontSize: 18,
     lineHeight: 24,
     textAlign: "justify",
+    color: "#fff",
   },
   buttonContainer: {
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 10,
+    justifyContent: "space-evenly",
   },
   button: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 10,
+    paddingHorizontal: 10,
   },
   buttonText: {
-    fontSize: 18,
-    marginLeft: 10,
+    fontSize: 20,
+    color: "#fff",
   },
 });
 

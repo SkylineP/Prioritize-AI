@@ -28,8 +28,7 @@ Getting Started
         RUN THE APPLICATION:
             Run the command 'expo start' to start the app using EXPO. 
             Open using your Android Emulator
-            Login
-            Enter a prompt using either a Text or Voice prompt
+
 
     Technologies Used
         React native

@@ -1,7 +1,7 @@
 Author: Olivier Langlois Medaino
 
 To-Do App
-    This is a simple To-Do App that allows you to create, edit, and delete tasks through AI generation. Simply enter a prompt for a task and the application will autogenerate steps.
+    This is a simple To-Do App that allows you to create, edit, and delete tasks through AI generation. Simply enter a prompt for a task and the application will           autogenerate steps.
 
 Features
     Add new tasks
@@ -32,10 +32,14 @@ Getting Started
         Open a terminal in the project directory and run 'npm install' to install dependencies
 
     Usage
-        Run the command 'npm start' to start the app
-        Open your browser and navigate to http://localhost:3000 to view the app or http://10.0.2.2:3000:3000 if using an Adnroid Emulator
-        Login
-        Enter a prompt using either a Text or Voice prompt
+        RUN SERVER: 
+            Open a new terminal, run the command "node server.js"
+           
+        RUN THE APPLICATION:
+            Run the command 'expo start' to start the app using EXPO. 
+            Open using your Android Emulator
+            Login
+            Enter a prompt using either a Text or Voice prompt
 
     Technologies Used
         React native

@@ -14,10 +14,7 @@ Getting Started
 
     1. Emulator
         Install Android Studio or Xcode depending on your computer's operating system.
-        Install Expo CLI using npm or yarn.
         Clone or download this repository to your computer.
-        Open a terminal window in the project folder and run expo start.
-        Once the Metro Bundler is ready, press a for Android or i for iOS to open the emulator.
 
 
     Installation

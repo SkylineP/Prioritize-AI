@@ -11,7 +11,6 @@ Features
     Dark mode
 
 Getting Started
-   To get started with this app, you have two options:
 
     1. Emulator
         Install Android Studio or Xcode depending on your computer's operating system.
@@ -20,12 +19,6 @@ Getting Started
         Open a terminal window in the project folder and run expo start.
         Once the Metro Bundler is ready, press a for Android or i for iOS to open the emulator.
 
-    2. Physical Device
-        Install the Expo app on your phone from the App Store (iOS) or Google Play (Android).
-        Clone or download this repository to your computer.
-        Open a terminal window in the project folder and run expo start.
-        Once the Metro Bundler is ready, scan the QR code with your phone's camera app or with the Expo app.
-        The app will open on your phone.
 
     Installation
         Clone this repository

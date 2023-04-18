@@ -28,7 +28,7 @@ export default function App() {
         <Stack.Screen
           name="Home"
           options={{
-            headerStyle: { backgroundColor: "black" },
+            headerStyle: { backgroundColor: "#262525" },
             headerTitleStyle: { color: "white" },
           }}
         >
@@ -51,7 +51,7 @@ export default function App() {
                 tabBarStyle: [
                   {
                     display: "flex",
-                    backgroundColor: "black",
+                    backgroundColor: "#262525",
                   },
                   null,
                 ],

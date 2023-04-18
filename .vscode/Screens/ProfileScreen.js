@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "flex-start",
-    backgroundColor: "black",
+    backgroundColor: "#262525",
   },
   backgroundImage: {
     height: 200,
@@ -82,16 +82,17 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 24,
+    color: "#fff",
     fontWeight: "bold",
   },
   bioContainer: {
     width: "100%",
     paddingHorizontal: 20,
-    paddingTop: 50,
-    backgroundColor: "#fff3",
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    marginTop: -20,
+    paddingTop: 20,
+    backgroundColor: "#363434",
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    marginTop: 0,
   },
   bio: {
     fontSize: 18,

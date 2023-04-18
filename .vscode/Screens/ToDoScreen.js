@@ -195,21 +195,13 @@ export default function ToDoScreen() {
           <Text style={styles.weekDayNumber}>28</Text>
         </View>
       </View>
+      {isLoading && (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" />
+        </View>
+      )}
+      {memoizedTaskListContainer}
       <View style={styles.containerRow}>
-        <TextInput
-          style={styles.input}
-          onChangeText={setInputMessage}
-          value={inputMessage}
-          placeholder="Enter New Task"
-        />
-        <TouchableOpacity style={styles.button} onPress={handleSubmitText}>
-          <Ionicons
-            name="add-circle-outline"
-            color="green"
-            size={45}
-          ></Ionicons>
-        </TouchableOpacity>
-
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
@@ -232,13 +224,21 @@ export default function ToDoScreen() {
             </View>
           </TouchableOpacity>
         </View>
+        <TextInput
+          style={styles.input}
+          onChangeText={setInputMessage}
+          value={inputMessage}
+          placeholder="Enter New Task"
+          placeholderTextColor="#262525"
+        />
+        <TouchableOpacity style={styles.button} onPress={handleSubmitText}>
+          <Ionicons
+            name="add-circle-outline"
+            color="green"
+            size={45}
+          ></Ionicons>
+        </TouchableOpacity>
       </View>
-      {isLoading && (
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" />
-        </View>
-      )}
-      {memoizedTaskListContainer}
     </View>
   );
 }
@@ -246,22 +246,22 @@ export default function ToDoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: "#363434",
   },
   containerRow: {
     flexDirection: "row",
-    backgroundColor: "black",
+    backgroundColor: "#363434",
   },
   input: {
     height: 40,
-    width: "60%",
+    width: "40%",
     borderColor: "gray",
     borderWidth: 1,
     padding: 10,
     marginBottom: 20,
     marginTop: 20,
     alignSelf: "center",
-    backgroundColor: "#fff5",
+    backgroundColor: "#fff",
     color: "#fff",
     borderRadius: 20,
     marginHorizontal: 10,
@@ -295,7 +295,7 @@ const styles = StyleSheet.create({
   },
   weekDayCellChosen: {
     alignItems: "center",
-    borderBottomColor: "orange",
+    borderBottomColor: "#c9612c",
     borderBottomWidth: 2,
   },
   weekDayText: {
@@ -310,7 +310,7 @@ const styles = StyleSheet.create({
   },
 
   weekDayNumberChosen: {
-    color: "orange",
+    color: "#c9612c",
     fontSize: 20,
     fontWeight: "bold",
     marginTop: 5,
@@ -332,7 +332,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   todayText: {
-    color: "orange",
-    fontSize: 18,
+    color: "#c9612c",
+    fontSize: 22,
   },
 });

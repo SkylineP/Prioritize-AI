@@ -1,12 +1,9 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons } from "@expo/vector-icons";
 
-import LoginScreen from "./.vscode/Screens/LoginScreen";
-import HomeScreen from "./.vscode/Screens/HomeScreen";
 import ProfileScreen from "./.vscode/Screens/ProfileScreen";
 import ToDoScreen from "./.vscode/Screens/ToDoScreen";
 
@@ -16,60 +13,24 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="Tasks">
         <Stack.Screen
-          name="Login"
-          component={LoginScreen}
+          name="Tasks"
+          component={ToDoScreen}
           options={{
-            headerStyle: { backgroundColor: "black" },
+            headerStyle: { backgroundColor: "#262525" },
             headerTitleStyle: { color: "white" },
+            headerShown: false,
           }}
         />
         <Stack.Screen
-          name="Home"
+          name="Profile"
+          component={ProfileScreen}
           options={{
             headerStyle: { backgroundColor: "#262525" },
             headerTitleStyle: { color: "white" },
           }}
-        >
-          {() => (
-            <Tab.Navigator
-              screenOptions={({ route }) => ({
-                tabBarIcon: ({ focused, color, size }) => {
-                  let iconName;
-
-                  if (route.name === "Tasks") {
-                    iconName = focused ? "list" : "list-outline";
-                  } else if (route.name === "Profile") {
-                    iconName = focused ? "person" : "person-outline";
-                  }
-
-                  return <Ionicons name={iconName} size={size} color={color} />;
-                },
-                tabBarActiveTintColor: "white",
-                tabBarInactiveTintColor: "gray",
-                tabBarStyle: [
-                  {
-                    display: "flex",
-                    backgroundColor: "#262525",
-                  },
-                  null,
-                ],
-              })}
-            >
-              <Tab.Screen
-                name="Tasks"
-                component={ToDoScreen}
-                options={{ headerShown: false }}
-              />
-              <Tab.Screen
-                name="Profile"
-                component={ProfileScreen}
-                options={{ headerShown: false }}
-              />
-            </Tab.Navigator>
-          )}
-        </Stack.Screen>
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

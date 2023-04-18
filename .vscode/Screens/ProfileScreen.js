@@ -5,9 +5,10 @@ import {
   View,
   ImageBackground,
   Image,
-  TouchableOpacity,
+  Switch,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import LinearGradient from "react-native-linear-gradient";
 
 const ProfileScreen = () => {
   const userInfo = {
@@ -16,45 +17,53 @@ const ProfileScreen = () => {
     backgroundUri: "https://source.unsplash.com/1600x900/?nature,water",
   };
 
-  return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={{ uri: userInfo.backgroundUri }}
-        style={styles.backgroundImage}
-      >
-        <View style={styles.profileContainer}>
-          <Image
-            source={{ uri: userInfo.imageUri }}
-            style={styles.profilePic}
-          />
-          <Text style={styles.name}>{userInfo.name}</Text>
-        </View>
-      </ImageBackground>
-      <View style={styles.bioContainer}>
-        <View style={styles.buttonContainer}>
-          <View style={{ flexDirection: "row" }}>
-            <Ionicons
-              style={styles.button}
-              name="pencil"
-              size={25}
-              color="orange"
-            />
-            <Text style={styles.buttonText}>Profile</Text>
-          </View>
-          <View style={{ flexDirection: "row" }}>
-            <Ionicons
-              style={styles.button}
-              name="key"
-              size={30}
-              color="black"
-            />
-            <Text style={styles.buttonText}>Password</Text>
-          </View>
-        </View>
+  const [isEnabled, setIsEnabled] = React.useState(false);
 
-        <Text style={styles.bio}></Text>
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+
+  return (
+    <LinearGradient colors={["#262525", "#363434"]} style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <ImageBackground
+          source={{ uri: userInfo.backgroundUri }}
+          style={styles.backgroundImage}
+        >
+          <View style={styles.profileContainer}>
+            <Image
+              source={{ uri: userInfo.imageUri }}
+              style={styles.profilePic}
+            />
+            <Text style={styles.name}>{userInfo.name}</Text>
+          </View>
+        </ImageBackground>
+
+        <View>
+          <View style={styles.buttonContainer}>
+            <View style={{ flexDirection: "row" }}>
+              <Ionicons
+                style={styles.button}
+                name="pencil"
+                size={25}
+                color="orange"
+              />
+              <Text style={styles.buttonText}>Profile</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.toggle}>
+          <Ionicons name="mic" size={30} color="white" />
+          <Switch
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={toggleSwitch}
+            value={isEnabled}
+            style={styles.switch}
+          />
+          <Ionicons name="create" size={30} color="white" />
+        </View>
       </View>
-    </View>
+    </LinearGradient>
   );
 };
 
@@ -63,7 +72,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "flex-start",
-    backgroundColor: "#262525",
   },
   backgroundImage: {
     height: 200,
@@ -94,16 +102,10 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 20,
     marginTop: 0,
   },
-  bio: {
-    fontSize: 18,
-    lineHeight: 24,
-    textAlign: "justify",
-    color: "#fff",
-  },
   buttonContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 10,
+    margin: 15,
     justifyContent: "space-evenly",
   },
   button: {
@@ -112,6 +114,15 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 20,
     color: "#fff",
+  },
+  toggle: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    marginTop: 20,
+  },
+  switch: {
+    marginLeft: 10,
+    marginRight: 15,
   },
 });
 

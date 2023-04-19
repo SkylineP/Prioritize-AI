@@ -24,7 +24,7 @@ export default function App() {
           }}
         />
         <Stack.Screen
-          name="Profile"
+          name="Settings"
           component={ProfileScreen}
           options={{
             headerStyle: { backgroundColor: "#262525" },

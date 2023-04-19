@@ -156,7 +156,7 @@ export default function ToDoScreen({ navigation }) {
 
   const handleHamburger = () => {
     // Navigate to the Tasks page
-    navigation.navigate("Profile");
+    navigation.navigate("Settings");
   };
 
   return (

@@ -36,20 +36,6 @@ const ProfileScreen = () => {
             <Text style={styles.name}>{userInfo.name}</Text>
           </View>
         </ImageBackground>
-
-        <View>
-          <View style={styles.buttonContainer}>
-            <View style={{ flexDirection: "row" }}>
-              <Ionicons
-                style={styles.button}
-                name="pencil"
-                size={25}
-                color="orange"
-              />
-              <Text style={styles.buttonText}>Profile</Text>
-            </View>
-          </View>
-        </View>
         <View style={styles.toggle}>
           <Ionicons name="mic" size={30} color="white" />
           <Switch
@@ -60,7 +46,7 @@ const ProfileScreen = () => {
             value={isEnabled}
             style={styles.switch}
           />
-          <Ionicons name="create" size={30} color="white" />
+          <Ionicons name="pencil" size={30} color="white" />
         </View>
       </View>
     </LinearGradient>

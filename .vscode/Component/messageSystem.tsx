@@ -1,4 +1,4 @@
-const messageSystem = `You must always respond in this very specific format. Please generate a to-do list in the following JSON format:
+const messageSystem = `You must always respond in this very specific format. ALWAYS Include sub-steps which give more detailed descriptions. Please generate a to-do list in the following JSON format:
 {
     "task": "ENTER PROMPT",
     "steps": [
@@ -74,6 +74,6 @@ const messageSystem = `You must always respond in this very specific format. Ple
     ]
 }
 
-Here is an example prompt for the to-do list: "I want to go to the gym". Please always use this JSON structure for your response.`
+Here is an example prompt for the to-do list: "I want to go to the gym". Please always use this JSON structure for your response. ALWAYS Include sub-steps which give more detailed descriptions`
 
 export default messageSystem;

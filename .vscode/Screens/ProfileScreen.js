@@ -21,6 +21,11 @@ const ProfileScreen = () => {
 
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
+  const pencilModeToggle = () => {
+    console.log("Pencil Mode");
+    window.pencilMode = !window.pencilMode;
+  };
+
   return (
     <LinearGradient colors={["#262525", "#363434"]} style={{ flex: 1 }}>
       <View style={styles.container}>
@@ -39,10 +44,13 @@ const ProfileScreen = () => {
         <View style={styles.toggle}>
           <Ionicons name="mic" size={30} color="white" />
           <Switch
-            trackColor={{ false: "#767577", true: "#81b0ff" }}
-            thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+            trackColor={{ false: "#fffff", true: "#055C9D" }}
+            thumbColor={isEnabled ? "#fffff" : "#f4f3f4"}
             ios_backgroundColor="#3e3e3e"
-            onValueChange={toggleSwitch}
+            onValueChange={() => {
+              toggleSwitch();
+              pencilModeToggle();
+            }}
             value={isEnabled}
             style={styles.switch}
           />

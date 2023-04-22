@@ -8,6 +8,7 @@ import {
   Button,
   TouchableOpacity,
   ActivityIndicator,
+  ScrollView,
 } from "react-native";
 import messageSystem from "../Component/messageSystem.tsx";
 import TaskListContainer from "../Component/TaskListContainer";
@@ -18,17 +19,17 @@ import * as Permissions from "expo-permissions";
 import { Audio } from "expo-av";
 import * as FileSystem from "expo-file-system";
 
-export default function ToDoScreen({ navigation }) {
+export default function ToDoScreen({ navigation, route }) {
   const [inputMessage, setInputMessage] = useState("");
   const [outputMessage, setOutputMessage] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [recording, setRecording] = useState(null);
   const [uri, setUri] = useState(null);
-  const [clickCount, setClickCount] = useState(0);
-  const [test, setTest] = useState(false);
   const [mic, setMic] = useState(false);
   const [isChecked, setIsChecked] = useState([false]);
-  const [isStarred, setIsStarred] = useState([false]);
+
+  const pencilMode = window.pencilMode;
+  console.log("Pencil Mode: " + pencilMode);
 
   const getMicrophonePermission = async () => {
     const { status } = await Audio.requestPermissionsAsync();
@@ -37,18 +38,8 @@ export default function ToDoScreen({ navigation }) {
     }
   };
 
-  const handleCheck = (i) => {
-    setIsChecked((prevState) => {
-      prevState[i] = !prevState[i];
-      return [...prevState];
-    });
-  };
-
-  const handleStarred = (i) => {
-    setIsStarred((prevState) => {
-      prevState[i] = !prevState[i];
-      return [...prevState];
-    });
+  const handleMic = () => {
+    setMic((prevState) => !prevState);
   };
 
   //console.log(messageSystem);
@@ -96,6 +87,7 @@ export default function ToDoScreen({ navigation }) {
   };
 
   const startRecording = async () => {
+    handleMic();
     try {
       console.log("Requesting permissions..");
       await Audio.requestPermissionsAsync();
@@ -117,6 +109,7 @@ export default function ToDoScreen({ navigation }) {
   };
 
   const stopRecording = async () => {
+    handleMic();
     console.log("Stopping recording..");
     setRecording(null);
     await recording.stopAndUnloadAsync();
@@ -178,6 +171,10 @@ export default function ToDoScreen({ navigation }) {
     navigation.navigate("Settings");
   };
 
+  const clearInput = () => {
+    setInputMessage("");
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -227,46 +224,68 @@ export default function ToDoScreen({ navigation }) {
           <ActivityIndicator size="large" />
         </View>
       )}
+
       {memoizedTaskListContainer}
       <View style={styles.containerRow}>
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <TouchableOpacity
-            onPress={recording ? stopRecording : startRecording}
+        {!pencilMode ? (
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
-            <View
-              style={{
-                margin: 10,
-                borderWidth: 4,
-                borderColor: "#055C9D",
-                borderRadius: 50, // Set to half of the icon size to create a circular shape
-                backgroundColor: "#363434",
+            <TouchableOpacity
+              onPress={recording ? stopRecording : startRecording}
+            >
+              <View
+                style={{
+                  margin: 10,
+                  borderWidth: 4,
+                  borderColor: "#055C9D",
+                  borderRadius: 50, // Set to half of the icon size to create a circular shape
+                  backgroundColor: "#363434",
+                }}
+              >
+                <Ionicons
+                  style={
+                    mic ? { justifyContent: "center", left: 2 } : styles.micOn
+                  }
+                  name={mic ? "mic-off" : "mic"}
+                  size={90}
+                  color="#055C9D"
+                />
+              </View>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "row",
+            }}
+          >
+            <TextInput
+              style={styles.input}
+              onChangeText={setInputMessage}
+              value={inputMessage}
+              placeholder="Enter New Task"
+              placeholderTextColor="#262525"
+            />
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                handleSubmitText();
+                clearInput();
               }}
             >
               <Ionicons
                 style={{ justifyContent: "center", left: 1 }}
-                name={recording ? "mic-off" : "mic"}
-                size={90}
+                name="add-circle-outline"
                 color="#055C9D"
-              />
-            </View>
-          </TouchableOpacity>
-        </View>
-        {/* <TextInput
-          style={styles.input}
-          onChangeText={setInputMessage}
-          value={inputMessage}
-          placeholder="Enter New Task"
-          placeholderTextColor="#262525"
-        /> */}
-        {/* <TouchableOpacity style={styles.button} onPress={handleSubmitText}>
-          <Ionicons
-            name="add-circle-outline"
-            color="#055C9D"
-            size={45}
-          ></Ionicons>
-        </TouchableOpacity> */}
+                size={45}
+              ></Ionicons>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     </View>
   );
@@ -286,7 +305,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    width: "40%",
+    width: "60%",
     borderColor: "gray",
     borderWidth: 1,
     padding: 10,
@@ -294,7 +313,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     alignSelf: "center",
     backgroundColor: "#fff",
-    color: "#fff",
+    color: "black",
     borderRadius: 20,
     marginHorizontal: 10,
   },
@@ -429,6 +448,5 @@ const styles = StyleSheet.create({
   micOn: {
     justifyContent: "center",
     left: 2,
-
   },
 });

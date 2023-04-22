@@ -10,6 +10,8 @@ import ToDoScreen from "./.vscode/Screens/ToDoScreen";
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+window.pencilMode = false;
+
 export default function App() {
   return (
     <NavigationContainer>

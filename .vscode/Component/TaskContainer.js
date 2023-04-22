@@ -1,34 +1,50 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-} from "react-native";
+import { StyleSheet, Text, View, FlatList } from "react-native";
 import StepContainer from "./StepContainer";
 import { Ionicons } from "@expo/vector-icons";
 
-function TaskContainer({ task }) {
+function TaskContainer({ task, removeTask }) {
   console.log("INSIDE TASK CONTAINER");
   console.log(task);
 
   const [isStarred, setIsStarred] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   const toggleStarred = () => {
     setIsStarred(!isStarred);
+  };
+
+  const toggleChecked = () => {
+    setIsChecked(!isChecked);
+  };
+
+  const handleRemoveTask = () => {
+    removeTask(task.id);
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.containerDate}>
         <Ionicons
+          style={styles.check}
+          name={isChecked ? "checkmark-circle-outline" : "ellipse-outline"}
+          size={35}
+          color="white"
+          onPress={toggleChecked}
+        />
+        <Ionicons
           style={{ paddingHorizontal: 20 }}
           name={isStarred ? "star" : "star-outline"}
-          size={20}
+          size={28}
           color="#FFFF00"
           onPress={toggleStarred}
         />
-        <Ionicons name={"trash-outline"} size={24} color="#FF0000" />
+        <Ionicons
+          name={"trash-outline"}
+          size={30}
+          color="#FF0000"
+          onPress={handleRemoveTask}
+        />
       </View>
 
       <Text style={styles.heading}>{task.task}</Text>
@@ -47,8 +63,8 @@ const styles = StyleSheet.create({
     width: "96%",
     marginHorizontal: "1%",
     marginTop: 20,
-    backgroundColor: "#fff1",
-    borderRadius: 25,
+    backgroundColor: "#858585",
+    borderRadius: 15,
     padding: 10,
     shadowColor: "#000",
     shadowOffset: {
@@ -58,6 +74,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
     elevation: 4,
+    marginLeft: 10,
   },
 
   containerDate: {
@@ -88,6 +105,11 @@ const styles = StyleSheet.create({
   flatListContainer: {
     width: "95%",
     alignSelf: "flex-start",
+  },
+  check: {
+    top: 20,
+    right: 235,
+    justifyContent: "flex-start",
   },
 });
 

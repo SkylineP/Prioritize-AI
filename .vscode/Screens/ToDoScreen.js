@@ -24,12 +24,31 @@ export default function ToDoScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
   const [recording, setRecording] = useState(null);
   const [uri, setUri] = useState(null);
+  const [clickCount, setClickCount] = useState(0);
+  const [test, setTest] = useState(false);
+  const [mic, setMic] = useState(false);
+  const [isChecked, setIsChecked] = useState([false]);
+  const [isStarred, setIsStarred] = useState([false]);
 
   const getMicrophonePermission = async () => {
     const { status } = await Audio.requestPermissionsAsync();
     if (status !== "granted") {
       console.log("Permission to access microphone denied");
     }
+  };
+
+  const handleCheck = (i) => {
+    setIsChecked((prevState) => {
+      prevState[i] = !prevState[i];
+      return [...prevState];
+    });
+  };
+
+  const handleStarred = (i) => {
+    setIsStarred((prevState) => {
+      prevState[i] = !prevState[i];
+      return [...prevState];
+    });
   };
 
   //console.log(messageSystem);
@@ -358,5 +377,58 @@ const styles = StyleSheet.create({
   todayText: {
     color: "#055C9D",
     fontSize: 22,
+  },
+  task: {
+    flexDirection: "row",
+    marginLeft: 8,
+    width: "96%",
+    marginHorizontal: "1%",
+    marginTop: 20,
+    backgroundColor: "#858585",
+    borderRadius: 15,
+    padding: 10,
+  },
+  taskContent: {
+    padding: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  taskCheck: {
+    marginRight: 10,
+  },
+  taskMessageText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "white",
+  },
+  taskIcons: {
+    flexDirection: "row",
+    marginLeft: 55,
+  },
+  subtask: {
+    flexDirection: "row",
+    marginLeft: 120,
+    width: "70%",
+    marginTop: 10,
+    backgroundColor: "#858585",
+    borderRadius: 15,
+    padding: 10,
+    justifyContent: "flex-end",
+  },
+  subtaskContent: {
+    padding: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  subtaskIcons: {
+    flexDirection: "row",
+    marginLeft: 20,
+  },
+  micOn: {
+    justifyContent: "center",
+    left: 2,
+
   },
 });

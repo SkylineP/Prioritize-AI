@@ -18,7 +18,7 @@ import * as Permissions from "expo-permissions";
 import { Audio } from "expo-av";
 import * as FileSystem from "expo-file-system";
 
-export default function ToDoScreen() {
+export default function ToDoScreen({ navigation }) {
   const [inputMessage, setInputMessage] = useState("");
   const [outputMessage, setOutputMessage] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -154,83 +154,53 @@ export default function ToDoScreen() {
     return <TaskListContainer tasks={outputMessage} />;
   }, [outputMessage]);
 
+  const handleHamburger = () => {
+    // Navigate to the Tasks page
+    navigation.navigate("Settings");
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.monthContainer}>
-        <View style={styles.dateRow}>
-          <Text style={styles.monthText}>April </Text>
-          <Ionicons name={"chevron-down-outline"} size={24} color="white" />
-        </View>
-
-        <Text style={styles.todayText}>Today</Text>
-      </View>
-
-      <View style={styles.weekDaysContainer}>
-        <View style={styles.weekDayCell}>
-          <Text style={styles.weekDayText}>M</Text>
-          <Text style={styles.weekDayNumber}>22</Text>
-        </View>
-        <View style={styles.weekDayCell}>
-          <Text style={styles.weekDayText}>T</Text>
-          <Text style={styles.weekDayNumber}>23</Text>
-        </View>
-        <View style={styles.weekDayCellChosen}>
-          <Text style={styles.weekDayText}>W</Text>
-          <Text style={styles.weekDayNumberChosen}>24</Text>
-        </View>
-        <View style={styles.weekDayCell}>
-          <Text style={styles.weekDayText}>T</Text>
-          <Text style={styles.weekDayNumber}>25</Text>
-        </View>
-        <View style={styles.weekDayCell}>
-          <Text style={styles.weekDayText}>F</Text>
-          <Text style={styles.weekDayNumber}>26</Text>
-        </View>
-        <View style={styles.weekDayCell}>
-          <Text style={styles.weekDayText}>S</Text>
-          <Text style={styles.weekDayNumber}>27</Text>
-        </View>
-        <View style={styles.weekDayCell}>
-          <Text style={styles.weekDayText}>S</Text>
-          <Text style={styles.weekDayNumber}>28</Text>
-        </View>
-      </View>
-      <View style={styles.containerRow}>
-        <TextInput
-          style={styles.input}
-          onChangeText={setInputMessage}
-          value={inputMessage}
-          placeholder="Enter New Task"
-        />
-        <TouchableOpacity style={styles.button} onPress={handleSubmitText}>
-          <Ionicons
-            name="add-circle-outline"
-            color="green"
-            size={45}
-          ></Ionicons>
-        </TouchableOpacity>
-
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <TouchableOpacity
-            onPress={recording ? stopRecording : startRecording}
-          >
-            <View
-              style={{
-                borderWidth: 2,
-                borderColor: "blue",
-                borderRadius: 50, // Set to half of the icon size to create a circular shape
-                padding: 7, // Add some padding to make the border more visible
-              }}
-            >
-              <Ionicons
-                name={recording ? "mic-off" : "mic"}
-                size={24}
-                color="white"
-              />
-            </View>
+      <View style={styles.headerContainer}>
+        <View style={styles.monthContainer}>
+          <View style={styles.dateRow}>
+            <Text style={styles.monthText}>April </Text>
+            <Ionicons name={"chevron-down-outline"} size={24} color="white" />
+          </View>
+          <TouchableOpacity onPress={handleHamburger}>
+            <Ionicons name={"menu-outline"} size={32} color="white" />
           </TouchableOpacity>
+        </View>
+
+        <View style={styles.weekDaysContainer}>
+          <View style={styles.weekDayCellHide}>
+            <Text style={styles.weekDayText}>M</Text>
+            <Text style={styles.weekDayNumber}>22</Text>
+          </View>
+          <View style={styles.weekDayCell}>
+            <Text style={styles.weekDayText}>T</Text>
+            <Text style={styles.weekDayNumber}>23</Text>
+          </View>
+          <View style={styles.weekDayCell}>
+            <Text style={styles.weekDayText}>W</Text>
+            <Text style={styles.weekDayNumber}>24</Text>
+          </View>
+          <View style={styles.weekDayCellChosen}>
+            <Text style={styles.weekDayTextChosen}>T</Text>
+            <Text style={styles.weekDayNumberChosen}>25</Text>
+          </View>
+          <View style={styles.weekDayCell}>
+            <Text style={styles.weekDayText}>F</Text>
+            <Text style={styles.weekDayNumber}>26</Text>
+          </View>
+          <View style={styles.weekDayCell}>
+            <Text style={styles.weekDayText}>S</Text>
+            <Text style={styles.weekDayNumber}>27</Text>
+          </View>
+          <View style={styles.weekDayCellHide}>
+            <Text style={styles.weekDayText}>S</Text>
+            <Text style={styles.weekDayNumber}>28</Text>
+          </View>
         </View>
       </View>
       {isLoading && (
@@ -239,6 +209,46 @@ export default function ToDoScreen() {
         </View>
       )}
       {memoizedTaskListContainer}
+      <View style={styles.containerRow}>
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <TouchableOpacity
+            onPress={recording ? stopRecording : startRecording}
+          >
+            <View
+              style={{
+                margin: 10,
+                borderWidth: 4,
+                borderColor: "#055C9D",
+                borderRadius: 50, // Set to half of the icon size to create a circular shape
+                backgroundColor: "#363434",
+              }}
+            >
+              <Ionicons
+                style={{ justifyContent: "center", left: 1 }}
+                name={recording ? "mic-off" : "mic"}
+                size={90}
+                color="#055C9D"
+              />
+            </View>
+          </TouchableOpacity>
+        </View>
+        {/* <TextInput
+          style={styles.input}
+          onChangeText={setInputMessage}
+          value={inputMessage}
+          placeholder="Enter New Task"
+          placeholderTextColor="#262525"
+        /> */}
+        {/* <TouchableOpacity style={styles.button} onPress={handleSubmitText}>
+          <Ionicons
+            name="add-circle-outline"
+            color="#055C9D"
+            size={45}
+          ></Ionicons>
+        </TouchableOpacity> */}
+      </View>
     </View>
   );
 }
@@ -246,22 +256,25 @@ export default function ToDoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: "#363434",
   },
   containerRow: {
     flexDirection: "row",
-    backgroundColor: "black",
+    backgroundColor: "#262525",
+    paddingBottom: 15,
+    borderTopWidth: 3,
+    borderColor: "#858585",
   },
   input: {
     height: 40,
-    width: "60%",
+    width: "40%",
     borderColor: "gray",
     borderWidth: 1,
     padding: 10,
     marginBottom: 20,
     marginTop: 20,
     alignSelf: "center",
-    backgroundColor: "#fff5",
+    backgroundColor: "#fff",
     color: "#fff",
     borderRadius: 20,
     marginHorizontal: 10,
@@ -286,17 +299,23 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 20,
     marginTop: 20,
-    paddingBottom: 5,
-    borderBottomColor: "gray",
-    borderBottomWidth: 2,
+    paddingBottom: 8,
   },
   weekDayCell: {
     alignItems: "center",
   },
   weekDayCellChosen: {
     alignItems: "center",
-    borderBottomColor: "orange",
+    borderBottomColor: "#055C9D",
     borderBottomWidth: 2,
+  },
+  weekDayTextChosen: {
+    color: "#055C9D",
+    fontSize: 12,
+  },
+  weekDayCellHide: {
+    alignItems: "center",
+    opacity: 0.3,
   },
   weekDayText: {
     color: "white",
@@ -310,12 +329,17 @@ const styles = StyleSheet.create({
   },
 
   weekDayNumberChosen: {
-    color: "orange",
+    color: "#055C9D",
     fontSize: 20,
     fontWeight: "bold",
     marginTop: 5,
   },
-
+  headerContainer: {
+    backgroundColor: "#262525",
+    paddingTop: 50,
+    borderBottomWidth: 3,
+    borderColor: "#858585",
+  },
   monthContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -332,7 +356,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   todayText: {
-    color: "orange",
-    fontSize: 18,
+    color: "#055C9D",
+    fontSize: 22,
   },
 });

@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
-  TextInput,
   View,
   FlatList,
-  Button,
 } from "react-native";
 import StepContainer from "./StepContainer";
 import { Ionicons } from "@expo/vector-icons";
@@ -14,18 +12,23 @@ function TaskContainer({ task }) {
   console.log("INSIDE TASK CONTAINER");
   console.log(task);
 
+  const [isStarred, setIsStarred] = useState(false);
+
+  const toggleStarred = () => {
+    setIsStarred(!isStarred);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.containerDate}>
-        <Text style={styles.date}>24 Apr - </Text>
-        <Text style={[styles.date2, { flex: 1 }]}>Today</Text>
         <Ionicons
           style={{ paddingHorizontal: 20 }}
-          name={"star-outline"}
+          name={isStarred ? "star" : "star-outline"}
           size={20}
-          color="yellow"
+          color="#FFFF00"
+          onPress={toggleStarred}
         />
-        <Ionicons name={"trash-bin-outline"} size={24} color="red" />
+        <Ionicons name={"trash-outline"} size={24} color="#FF0000" />
       </View>
 
       <Text style={styles.heading}>{task.task}</Text>
@@ -61,6 +64,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginHorizontal: 15,
     marginBottom: 5,
+    justifyContent: "flex-end",
   },
   heading: {
     fontSize: 20,
@@ -76,7 +80,7 @@ const styles = StyleSheet.create({
   },
   date2: {
     fontSize: 20,
-    color: "orange",
+    color: "#055C9D",
   },
   delete: {
     fontSize: 20,
